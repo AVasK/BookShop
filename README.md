@@ -4,7 +4,8 @@
 - [x] As modular as i could make it
 - [x] Class Hierarchy for BookShop [all lie in store.py]
 - [x] Using ModelTime class to handle changes in time gracefully (~or not~)
-- [ ] Order, Publisher classes
+- [x] Order, Publisher classes (aand more...)
+- [x] Promise class added to support shipping promises
 - [ ] Supporting Model class for modeling
 - [ ] Operational model
 - [ ] GUI 
