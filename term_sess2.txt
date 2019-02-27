@@ -1,0 +1,62 @@
+// Terminal session:
+
+iMac-Alex:BookShop-master avask$ python3 -i store.py 
+[Factoid, NoShitNoPress]
+>>> store.check_orders()
+>>> store.check_promises()
+False
+>>> store.orders.append(Order(store, ManGenerator.random(), books_chosen))
+>>> store.check_promises()
+False
+>>> store.check_orders()
+Waiting for publisher
+>>> store.check_promises()
+False
+>>> store.promises
+[<publisher.Promise object at 0x10da00c18>]
+>>> store.promises[0]
+<publisher.Promise object at 0x10da00c18>
+>>> store.promises[0].books
+[<Book: Сказки про Мат.Анализ / I.Sur_102 / 534, <Book: Сказки про Мат.Анализ / I.Sur_102 / 534, <Book: Сказки про Мат.Анализ / I.Sur_102 / 534, <Book: Сказки про Мат.Анализ / I.Sur_102 / 534, <Book: Сказки про Мат.Анализ / I.Sur_102 / 534]
+>>> print(store.shelf)
+<Book: Физика: Оптика / I.Набоков / 377  377$ <   5> 🔒
+<Book: Выучить С++ за 21 день / V.Sur_102, S.Sur_102, I.Sur_102 / 185  185$ <   5> 🔒
+<Book: Мат.Анализ III / O.Горький / 240  240$ <   5> 🔒
+<Book: Сказки про Мат.Анализ / O.0xDEADBEEF, I.0xDEADBEEF, V.Набоков / 613  613$ <   5> 
+<Book: Мат.Анализ III / I.Толстой, S.0xDEADBEEF / 354  354$ <   5> 🔒
+<Book: Мат.Анализ I / S.0xDEADBEEF / 471  471$ <   3> 🔒
+<Book: Сказки про Мат.Анализ / O.Sur_102, V.Sur_101, A.0xDEADBEEF / 279  279$ <   5> 🔒
+<Book: Физика: Оптика / V.Горький, S.Sur_102 / 914  914$ <   3> 
+<Book: Сказки про Мат.Анализ / I.Sur_102 / 534  534$ <   1> 
+<Book: Мат.Анализ II / S.0xDEADBEEF / 868  868$ <   5> 
+<Book: Мат.Анализ I / A.Sur_101, O.Набоков, I.Sur_101 / 969  969$ <   5> 
+<Book: Выучить С++ за 21 день / O.Набоков / 535  535$ <   5> 🔒
+
+>>> store.orders
+[]
+>>> store.promises
+[<publisher.Promise object at 0x10da00c18>]
+>>> ModelTime.timeStep()
+>>> store.check_promises()
+False
+>>> ModelTime.timeStep()
+>>> store.check_promises()
+False
+>>> ModelTime.timeStep()
+>>> store.check_promises()
+True
+>>> print(store.shelf)
+<Book: Физика: Оптика / I.Набоков / 377  377$ <   5> 🔒
+<Book: Выучить С++ за 21 день / V.Sur_102, S.Sur_102, I.Sur_102 / 185  185$ <   5> 🔒
+<Book: Мат.Анализ III / O.Горький / 240  240$ <   5> 🔒
+<Book: Сказки про Мат.Анализ / O.0xDEADBEEF, I.0xDEADBEEF, V.Набоков / 613  613$ <   5> 
+<Book: Мат.Анализ III / I.Толстой, S.0xDEADBEEF / 354  354$ <   5> 🔒
+<Book: Мат.Анализ I / S.0xDEADBEEF / 471  471$ <   3> 🔒
+<Book: Сказки про Мат.Анализ / O.Sur_102, V.Sur_101, A.0xDEADBEEF / 279  279$ <   5> 🔒
+<Book: Физика: Оптика / V.Горький, S.Sur_102 / 914  914$ <   3> 
+<Book: Сказки про Мат.Анализ / I.Sur_102 / 534  534$ <   6> 
+<Book: Мат.Анализ II / S.0xDEADBEEF / 868  868$ <   5> 
+<Book: Мат.Анализ I / A.Sur_101, O.Набоков, I.Sur_101 / 969  969$ <   5> 
+<Book: Выучить С++ за 21 день / O.Набоков / 535  535$ <   5> 🔒
+
+>>> 
