@@ -3,8 +3,8 @@ import random
 from modelTime import ModelTime
 from order import Order
 from publisher import Publisher
-from man import Man
-from queue import SimpleQueue
+# from man import Man
+
 
 class Warehouse:
     # class contains different books & stats
@@ -21,8 +21,7 @@ class Warehouse:
                 self.count[book] += 1
             else:
                 self.count[book] = 1
-            
-    
+
     def __str__(self):
         ans = ''
         for book in list(self.books()):
@@ -30,19 +29,15 @@ class Warehouse:
             ans += f"{str(book):10}{book.price:>5}$ <{self.count[book]:4}> {lock}\n"
     
         return ans
-    
-    
+
     def __getitem__(self, idx):
         return tuple(self.books())[idx] # changed list -> tuple for immutability
-    
-    
+
     def books(self):
         return set(self.count.keys())
-    
-    
+
     def inc_rating(self, book):
         self.rating[book] += 1
-    
     
     def add(self, book):
         if book in self.count.keys():
@@ -51,8 +46,7 @@ class Warehouse:
             self.count[book] = 1
             
         return self
-            
-    
+
     def remove(self, book):
         if book in self.books() and self.count[book] > 0:
             self.inc_rating(book)
@@ -60,16 +54,13 @@ class Warehouse:
             return self.find(book = book)
         else:
             return None
-        
-    
+
     def list_books(self):
         return list(self.books())
-    
-    
+
     def list_new(self):
         return [book for book in self.books() if book.is_new()]
-    
-    
+
     def find(self, *, name = None, book = None):
         # Find by book's name
         if name is not None:
@@ -83,8 +74,7 @@ class Warehouse:
                 if book == _book:
                     return _book
             return None
-        
-    
+
     def in_stock(self, book):
         b = None
         for _book in self.books():
@@ -95,8 +85,7 @@ class Warehouse:
             return True
         else:
             return False
-        
-        
+
     def book_count(self, book):
         b = None
         for _book in self.books():
@@ -104,8 +93,7 @@ class Warehouse:
                 b = _book
                 break
         return self.count[b]
-    
-    
+
     def findall(self, name):
         return [book for book in self.books() if book.name == name]
         
@@ -122,14 +110,13 @@ class Book:
         self.price = price
         self.for_kids = bool(for_kids)
         self.time = ModelTime(n_days_ago)
-        
-        
+
     @classmethod
     def rePrice(cls, book, new_price):
         new_book = cls(book.name, book.authors, book.publisher, book.year, book.genre, book.pages, new_price, book.for_kids)
         new_book.time = book.time
         return new_book
-    
+
     @classmethod
     def copy(cls, book):
         new_book = cls(book.name, book.authors, book.publisher, book.year, book.genre, book.pages, book.price, book.for_kids)
@@ -160,28 +147,24 @@ class Book:
     def __hash__(self):
         return hash(self.name) ^ hash(self.year) ^ hash(self.authors) ^ hash(self.publisher)
         
-        
-        
+
 class Store:
     AUTO_BUY = True
     usual_markup = 0.15
     novel_markup = 0.35
     
-    
     def __init__(self, books = None):
         self.shelf = Warehouse(books) if books is not None else Warehouse([])
         self.orders = []
         self.promises = []
-        
-        
+
     def pull_books(self):
         books = []
         for p in Publisher.enlist():
             books += list(p.books)
             
         self.shelf = Warehouse(books * 5)
-        
-        
+
     def get_price(self, book):
         book = self.shelf.find(book = book)
         if book is None:
@@ -191,22 +174,21 @@ class Store:
         markup = self.novel_markup if book.is_new() else self.usual_markup
         total = price + markup * price
         return int(total)
-    
-    
+
     def order(self, customer, orders : []):
         book_list = []
       
         for order in orders:
             # Author
             if hasattr(order, 'surname'):
-                #searching most recent release among all publishers
-                publishers = Publisher.enlist() # all existing publishers
+                # searching most recent release among all publishers
+                publishers = Publisher.enlist()  # all existing publishers
                 most_recent = []
                 for p in publishers:
                     books = p.booksByAuthor(order)
                     if books:
                         most_recent.append(books[0])
-                #the most recent book:
+                # the most recent book:
                 book = list(sorted(most_recent, key=lambda x: x.uptime()))[0]
                 book = Book.rePrice(book, self.get_price(book))
                 book_list.append(book)
@@ -216,7 +198,7 @@ class Store:
                     
         order = Order(self, customer, book_list) 
         
-        # if the orders are processed simulateously & automatically
+        # if the orders are processed simultaneously & automatically
         if self.AUTO_BUY:
             print("Buying books ASAP")
             if not order:
@@ -227,20 +209,18 @@ class Store:
                 self.orders.append(order)
             else:
                 # Buy it!
-                #print("Order is executed")
+                # Order is executed
                 order.execute()
                 
         return order
-    
-    
+
     @staticmethod
     def promised_books(promises):
         books = []
         for promise in promises:
             books += promise.content()
         return books
-    
-    
+
     def check_promises(self):
         flag = False
         promise = self.promises[0] if self.promises else False
@@ -253,16 +233,13 @@ class Store:
             promise = self.promises[0] if self.promises else False
                     
         return flag
-    
-    
+
     def check_orders(self):
         order = self.orders[0] if self.orders else False
         while order:
-            o = order.execute()
-            #print(o)
+            order.execute()
             self.orders.pop(0)
             order = self.orders[0] if self.orders else False
-    
     
     def buy(self, book):
         if self.shelf.remove(book):
@@ -282,14 +259,15 @@ class Store:
             return Book.copy(book) # Finally, a book is sold to the client.
         else:
             return None
-    
-    
+
+    def books(self):
+        return list(self.shelf.books())
+
     # Accessing Warehouse:
     def access_warehouse(self):
         return self.shelf
         
 
-            
 if __name__ == '__main__':
     # Consider this a unit-test)
     from dataGen import WarehouseGenerator, ManGenerator, BookGenerator, PublisherGenerator
@@ -299,7 +277,7 @@ if __name__ == '__main__':
     store.pull_books()
     print(Publisher.enlist())
     
-    #o = store.order(ManGenerator.random(), [book, book, books[2]])
+    # o = store.order(ManGenerator.random(), [book, book, books[2]])
     bs = list(store.access_warehouse().books())
     books_chosen = [random.choice(bs) for _ in range(4)]
     store.orders.append(Order(store, ManGenerator.random(), books_chosen))

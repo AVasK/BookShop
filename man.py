@@ -1,6 +1,8 @@
 # Added for the sake of OO model completeness (complexity too...)
 
+
 class Man:
+
     def __init__(self, name, surname, contact):
         if name is None:
             self.name = ''
@@ -9,8 +11,7 @@ class Man:
             
         self.surname = str(surname)
         self.contact = contact
-        
-        
+
     def __hash__(self):
         return hash(self.surname) ^ hash(self.name) ^ hash(self.contact)
         

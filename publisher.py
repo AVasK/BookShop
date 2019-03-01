@@ -1,6 +1,7 @@
 from modelTime import ModelTime
 import random
 
+
 class Publisher:
     listing = []
     
@@ -8,7 +9,6 @@ class Publisher:
         self.name = str(name)
         self.books = set(books)
         self.__class__.listing.append(self)
-        
 
     def __str__(self):
         books_str = '\n>'.join(str(b)+' ['+str(b.uptime())+']' for b in list(self.books))
@@ -16,17 +16,14 @@ class Publisher:
     
     def __repr__(self):
         return f"{self.name}"
-    
-    
+
     @classmethod
     def enlist(cls):
         return cls.listing
-    
-    
+
     def booksByAuthor(self, author):
         return list(sorted([book for book in self.books if author in book.authors], key=lambda x: x.uptime(), reverse = False))
-    
-    
+
     def print(self, book, qty):
         time = random.choice(list(range(1, 6)))
         return Promise([book] * qty, time)
@@ -50,7 +47,3 @@ class Promise:
         if self.timer():
             return self.books
         return False
-        
-        
-        
-        
