@@ -29,6 +29,19 @@ class Warehouse:
             ans += f"{str(book):10}{book.price:>5}$ <{self.count[book]:4}> {lock}\n"
     
         return ans
+    
+    def list_by_rating(self):
+        books = list(self.rating.items())
+        return sorted(books, key = lambda x : x[1], reverse = True)
+    
+    def books_by_genre(self, genre):
+        books = list(self.books())
+        return [b for b in books if b.genre == genre]
+    
+    def ratings_by_genre(self, genre):
+        books = list(self.books())
+        return (genre, [self.rating[b] for b in books if b.genre == genre])
+        
 
     def __getitem__(self, idx):
         return tuple(self.books())[idx] # changed list -> tuple for immutability
@@ -109,7 +122,7 @@ class Book:
         self.pages = int(pages)
         self.price = price
         self.for_kids = bool(for_kids)
-        self.time = ModelTime(n_days_ago)
+        self.time = ModelTime(ModelTime.y_to_d(self.year) + n_days_ago)
 
     @classmethod
     def rePrice(cls, book, new_price):
@@ -123,6 +136,9 @@ class Book:
         new_book.time = book.time
         return new_book
     
+    def book_to_POD(self):
+        return [self.name, self.authors, self.price, self.publisher]
+    
     def get_publisher(self):
         return self.publisher
         
@@ -133,7 +149,7 @@ class Book:
         return hash(self) == hash(other)
         
     def __str__(self):
-        return repr(self) # Mb change later...?
+        return f"-> {self.name}{' <new> ' if self.is_new() else ''}\nВ наличии: {self.store.shelf.book_count(self)}\nАвторы: {', '.join(str(a) for a in self.authors)}\nЦена: {self.price:,d}"
     
     def is_new(self):
         return self.time.is_recent()
@@ -141,8 +157,13 @@ class Book:
     def uptime(self):
         return self.time.time()
     
+    # Requires Book.store attribute set in Environment
     def __repr__(self):
-        return f"<Book: {self.name} / {', '.join(str(a) for a in self.authors)} / {self.price:,d}"
+        return f"[{self.store.shelf.book_count(self)}]{' <new> ' if self.is_new() else ''}{self.name} | {', '.join(str(a) for a in self.authors)} | {self.price:,d}"
+    
+    def qty(self):
+        return self.store.shelf.book_count(self)
+    
     
     def __hash__(self):
         return hash(self.name) ^ hash(self.year) ^ hash(self.authors) ^ hash(self.publisher)
@@ -150,21 +171,28 @@ class Book:
 
 class Store:
     AUTO_BUY = True
-    usual_markup = 0.15
-    novel_markup = 0.35
     
-    def __init__(self, books = None):
+    def __init__(self, books = None, usual_markup = 0.15, novel_markup = 0.35):
         self.shelf = Warehouse(books) if books is not None else Warehouse([])
         self.orders = []
         self.promises = []
+        self.usual_markup = usual_markup
+        self.novel_markup = novel_markup
 
-    def pull_books(self):
+    def pull_books(self, N_BOOKS = None):
         books = []
-        for p in Publisher.enlist():
-            books += list(p.books)
+        if N_BOOKS is None:
             
-        self.shelf = Warehouse(books * 5)
-
+            for p in Publisher.enlist():
+                books += list(p.books)
+            
+            self.shelf = Warehouse(books * 5)
+            return
+        else:
+            from itertools import chain
+            all_books = list(chain.from_iterable([list(p.books) for p in Publisher.enlist()]))
+            self.shelf = Warehouse([random.choice(all_books) for _ in range(N_BOOKS)])
+    
     def get_price(self, book):
         book = self.shelf.find(book = book)
         if book is None:
@@ -244,7 +272,7 @@ class Store:
     def buy(self, book):
         if self.shelf.remove(book):
             if self.shelf.book_count(book) <= self.shelf.THRESHOLD:
-                # There aren't much books left
+                # There aren't many books left
                 # First, checking if we have ordered this book already:
                 if book in Store.promised_books(self.promises):
                     print('Waiting for publisher')
@@ -262,6 +290,12 @@ class Store:
 
     def books(self):
         return list(self.shelf.books())
+    
+    def getOrders(self):
+        return list(self.orders)
+    
+    def getPromises(self):
+        return list(self.promises)
 
     # Accessing Warehouse:
     def access_warehouse(self):
@@ -274,7 +308,7 @@ if __name__ == '__main__':
     publisher1 = PublisherGenerator.random()
     publisher2 = Publisher('NoShitNoPress', WarehouseGenerator.random(4))
     store = Store()
-    store.pull_books()
+    store.pull_books(10)
     print(Publisher.enlist())
     
     # o = store.order(ManGenerator.random(), [book, book, books[2]])

@@ -11,8 +11,7 @@ class Publisher:
         self.__class__.listing.append(self)
 
     def __str__(self):
-        books_str = '\n>'.join(str(b)+' ['+str(b.uptime())+']' for b in list(self.books))
-        return f"{self.name}\n>{books_str}"
+        return str(self.name)
     
     def __repr__(self):
         return f"{self.name}"
@@ -33,6 +32,9 @@ class Promise:
     def __init__(self, books : [], time : int):
         self.books = list(books)
         self.timer = ModelTime.timer(time)
+        
+    def __str__(self):
+        return str(self.books[0].name) + ' | ' + str(self.books[0].authors) + ' | ' + str(len(self.books)) + '\n' + str(self.books[0].publisher)
         
     def ready(self):
         return self.timer()

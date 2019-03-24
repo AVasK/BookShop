@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="881db505-8d3e-4e36-aaea-3780e0f31986" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataGen.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataGen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/man.py" beforeDir="false" afterPath="$PROJECT_DIR$/man.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modelTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/modelTime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order.py" beforeDir="false" afterPath="$PROJECT_DIR$/order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/publisher.py" beforeDir="false" afterPath="$PROJECT_DIR$/publisher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store.py" beforeDir="false" afterPath="$PROJECT_DIR$/store.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tester.py" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dataGen.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modelTime.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/order.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/publisher.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/store.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="167" column="30" lean-forward="true" selection-start-line="167" selection-start-column="30" selection-end-line="167" selection-end-column="30" />
+              <folding>
+                <element signature="e#29#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="uml://JavaScript-modules-diagram//Users/avask/Documents/Programming/BookShop-master">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JavaScript-modules-diagram</ID>
+              <OriginalElement>$PROJECT_DIR$</OriginalElement>
+              <nodes />
+              <notes />
+              <edges />
+              <settings layout="Hierarchic Group" zoom="1.0" x="240.0" y="240.0" />
+              <SelectedNodes />
+              <Categories>
+                <Category>All</Category>
+              </Categories>
+              <VISIBILITY>Details</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/merged.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="uml://Python/#/Users/avask/Documents/Programming/BookShop-master/merged.py">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>Python</ID>
+              <OriginalElement>#/Users/avask/Documents/Programming/BookShop-master/merged.py</OriginalElement>
+              <nodes>
+                <node x="468.0" y="99.0">merged.Store</node>
+                <node x="899.0" y="99.0">merged.Promise</node>
+                <node x="172.0" y="99.0">merged.Publisher</node>
+                <node x="331.0" y="99.0">merged.Order</node>
+                <node x="1050.0" y="99.0">merged.Book</node>
+                <node x="771.0" y="99.0">merged.Man</node>
+                <node x="603.0" y="99.0">merged.ModelTime</node>
+                <node x="0.0" y="99.0">merged.Warehouse</node>
+                <node x="566.25" y="0.0">object</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="merged.Promise" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="964.5" y="59.0" />
+                  <point x="623.125" y="59.0" />
+                  <point x="21.875" y="14.5" />
+                </edge>
+                <edge source="merged.Store" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="525.5" y="79.0" />
+                  <point x="596.875" y="79.0" />
+                  <point x="-4.375" y="14.5" />
+                </edge>
+                <edge source="merged.ModelTime" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="677.0" y="79.0" />
+                  <point x="605.625" y="79.0" />
+                  <point x="4.375" y="14.5" />
+                </edge>
+                <edge source="merged.Book" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="1107.0" y="49.0" />
+                  <point x="631.875" y="49.0" />
+                  <point x="30.625" y="14.5" />
+                </edge>
+                <edge source="merged.Warehouse" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="76.0" y="49.0" />
+                  <point x="570.625" y="49.0" />
+                  <point x="-30.625" y="14.5" />
+                </edge>
+                <edge source="merged.Man" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="825.0" y="69.0" />
+                  <point x="614.375" y="69.0" />
+                  <point x="13.125" y="14.5" />
+                </edge>
+                <edge source="merged.Publisher" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="241.5" y="59.0" />
+                  <point x="579.375" y="59.0" />
+                  <point x="-21.875" y="14.5" />
+                </edge>
+                <edge source="merged.Order" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="389.5" y="69.0" />
+                  <point x="588.125" y="69.0" />
+                  <point x="-13.125" y="14.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.4281850118894834" x="148.04545489696807" y="26.045454896968067" />
+              <SelectedNodes />
+              <Categories />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="uml://Python/#/Users/avask/Documents/Programming/BookShop-master/store.py">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>Python</ID>
+              <OriginalElement>#/Users/avask/Documents/Programming/BookShop-master/store.py</OriginalElement>
+              <nodes>
+                <node x="278.0" y="79.0">store.Store</node>
+                <node x="120.0" y="79.0">store.Warehouse</node>
+                <node x="0.0" y="79.0">store.Book</node>
+                <node x="152.2712003277345" y="-11.237197869725549">object</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="store.Store" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="328.5" y="54.0" />
+                  <point x="212.33333333333331" y="54.0" />
+                  <point x="23.333333333333314" y="14.5" />
+                </edge>
+                <edge source="store.Warehouse" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="store.Book" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="50.0" y="54.0" />
+                  <point x="165.66666666666666" y="54.0" />
+                  <point x="-23.333333333333343" y="14.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.156872037914692" x="-107.54403932814421" y="-54.16231052847195" />
+              <SelectedNodes>
+                <node>object</node>
+              </SelectedNodes>
+              <Categories />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="uml://Python/#/Users/avask/Documents/Programming/BookShop-master/publisher.py">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>Python</ID>
+              <OriginalElement>#/Users/avask/Documents/Programming/BookShop-master/publisher.py</OriginalElement>
+              <nodes>
+                <node x="170.0" y="79.0">publisher.Promise</node>
+                <node x="123.0" y="0.0">object</node>
+                <node x="0.0" y="79.0">publisher.Publisher</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="publisher.Promise" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="241.0" y="54.0" />
+                  <point x="175.5" y="54.0" />
+                  <point x="17.5" y="14.5" />
+                </edge>
+                <edge source="publisher.Publisher" target="object">
+                  <point x="0.0" y="-14.5" />
+                  <point x="75.0" y="54.0" />
+                  <point x="140.5" y="54.0" />
+                  <point x="-17.5" y="14.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.0" x="-108.5" y="-134.5" />
+              <SelectedNodes />
+              <Categories />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/dataGen.py" />
+        <option value="$PROJECT_DIR$/man.py" />
+        <option value="$PROJECT_DIR$/modelTime.py" />
+        <option value="$PROJECT_DIR$/order.py" />
+        <option value="$PROJECT_DIR$/publisher.py" />
+        <option value="$PROJECT_DIR$/store.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="324" />
+    <option name="y" value="51" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="BookShop-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BookShop-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="881db505-8d3e-4e36-aaea-3780e0f31986" name="Default Changelist" comment="" />
+      <created>1551381871774</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1551381871774</updated>
+      <workItem from="1551384524609" duration="477000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="477000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="324" y="51" width="1400" height="1000" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2569956" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="PlantUML" order="3" weight="0.02209131" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tester.py" />
+    <entry file="file://$PROJECT_DIR$/man.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/term_sess2.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modelTime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/order.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/publisher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://Python/#/Users/avask/Documents/Programming/BookShop-master/store.py">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>Python</ID>
+          <OriginalElement>#/Users/avask/Documents/Programming/BookShop-master/store.py</OriginalElement>
+          <nodes>
+            <node x="278.0" y="79.0">store.Store</node>
+            <node x="120.0" y="79.0">store.Warehouse</node>
+            <node x="0.0" y="79.0">store.Book</node>
+            <node x="152.2712003277345" y="-11.237197869725549">object</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="store.Store" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="328.5" y="54.0" />
+              <point x="212.33333333333331" y="54.0" />
+              <point x="23.333333333333314" y="14.5" />
+            </edge>
+            <edge source="store.Warehouse" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="store.Book" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="50.0" y="54.0" />
+              <point x="165.66666666666666" y="54.0" />
+              <point x="-23.333333333333343" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.156872037914692" x="-107.54403932814421" y="-54.16231052847195" />
+          <SelectedNodes>
+            <node>object</node>
+          </SelectedNodes>
+          <Categories />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://Python/#/Users/avask/Documents/Programming/BookShop-master/publisher.py">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>Python</ID>
+          <OriginalElement>#/Users/avask/Documents/Programming/BookShop-master/publisher.py</OriginalElement>
+          <nodes>
+            <node x="170.0" y="79.0">publisher.Promise</node>
+            <node x="123.0" y="0.0">object</node>
+            <node x="0.0" y="79.0">publisher.Publisher</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="publisher.Promise" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="241.0" y="54.0" />
+              <point x="175.5" y="54.0" />
+              <point x="17.5" y="14.5" />
+            </edge>
+            <edge source="publisher.Publisher" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="75.0" y="54.0" />
+              <point x="140.5" y="54.0" />
+              <point x="-17.5" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="-108.5" y="-134.5" />
+          <SelectedNodes />
+          <Categories />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="167" column="30" lean-forward="true" selection-start-line="167" selection-start-column="30" selection-end-line="167" selection-end-column="30" />
+          <folding>
+            <element signature="e#29#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JavaScript-modules-diagram//Users/avask/Documents/Programming/BookShop-master">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$</OriginalElement>
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="240.0" y="240.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://Python/#/Users/avask/Documents/Programming/BookShop-master/merged.py">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>Python</ID>
+          <OriginalElement>#/Users/avask/Documents/Programming/BookShop-master/merged.py</OriginalElement>
+          <nodes>
+            <node x="468.0" y="99.0">merged.Store</node>
+            <node x="899.0" y="99.0">merged.Promise</node>
+            <node x="172.0" y="99.0">merged.Publisher</node>
+            <node x="331.0" y="99.0">merged.Order</node>
+            <node x="1050.0" y="99.0">merged.Book</node>
+            <node x="771.0" y="99.0">merged.Man</node>
+            <node x="603.0" y="99.0">merged.ModelTime</node>
+            <node x="0.0" y="99.0">merged.Warehouse</node>
+            <node x="566.25" y="0.0">object</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="merged.Promise" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="964.5" y="59.0" />
+              <point x="623.125" y="59.0" />
+              <point x="21.875" y="14.5" />
+            </edge>
+            <edge source="merged.Store" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="525.5" y="79.0" />
+              <point x="596.875" y="79.0" />
+              <point x="-4.375" y="14.5" />
+            </edge>
+            <edge source="merged.ModelTime" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="677.0" y="79.0" />
+              <point x="605.625" y="79.0" />
+              <point x="4.375" y="14.5" />
+            </edge>
+            <edge source="merged.Book" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="1107.0" y="49.0" />
+              <point x="631.875" y="49.0" />
+              <point x="30.625" y="14.5" />
+            </edge>
+            <edge source="merged.Warehouse" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="76.0" y="49.0" />
+              <point x="570.625" y="49.0" />
+              <point x="-30.625" y="14.5" />
+            </edge>
+            <edge source="merged.Man" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="825.0" y="69.0" />
+              <point x="614.375" y="69.0" />
+              <point x="13.125" y="14.5" />
+            </edge>
+            <edge source="merged.Publisher" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="241.5" y="59.0" />
+              <point x="579.375" y="59.0" />
+              <point x="-21.875" y="14.5" />
+            </edge>
+            <edge source="merged.Order" target="object">
+              <point x="0.0" y="-14.5" />
+              <point x="389.5" y="69.0" />
+              <point x="588.125" y="69.0" />
+              <point x="-13.125" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.4281850118894834" x="148.04545489696807" y="26.045454896968067" />
+          <SelectedNodes />
+          <Categories />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merged.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2" />
+      </provider>
+    </entry>
+  </component>
+</project>

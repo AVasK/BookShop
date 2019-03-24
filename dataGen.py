@@ -3,18 +3,26 @@ import random
 from store import Book, Warehouse
 from publisher import Publisher
 import modelTime
+from modelTime import ModelTime
 import man
 
 
-class DataGenerator:
+class DataGenerator(ABC):
+    
     # abstract data generator class
-    # @abstractmethod
-    def __init__(self):
-        # should generate needed entity
+    @abstractmethod
+    def random(cls, *args, **kwargs):
         pass
     
+    @classmethod
+    def __subclasshook__(cls, C):
+        if cls is DataGenerator:
+            if any("random" in B.__dict__ for B in C.__mro__):
+                return True
+        return NotImplemented
+    
 
-class ManGenerator(DataGenerator):
+class ManGenerator:
 
     @classmethod
     def random(cls, genName = False):
@@ -59,11 +67,11 @@ class ManGenerator(DataGenerator):
             return gen_phone()
 
 
-class BookGenerator(DataGenerator):
-
+class BookGenerator:
+    genres = ['комедия', 'драма', 'научная фантастика', 'фентези', 'научная литература']
+    
     @classmethod
     def random(cls, pub = None):
-        genres = ['комедия', 'драма', 'научная фантастика', 'фентези', 'научная литература']
         if pub is None:
             pub = cls.pick_pub()
             
@@ -71,8 +79,8 @@ class BookGenerator(DataGenerator):
                 'name': cls.gen_name(),
                 'authors': cls.pick_authors(),
                 'publisher': pub,
-                'year': random.randint(1700, modelTime.Year),
-                'genre': random.choice(genres),
+                'year': random.randint(ModelTime.current_year - 4, ModelTime.current_year), # new books
+                'genre': random.choice(cls.genres),
                 'pages': random.randint(20, 5000),
                 'price': random.randint(10, 1000),
                 'for_kids': random.choice((True, False)),
@@ -98,16 +106,17 @@ class BookGenerator(DataGenerator):
         return pub
     
 
-class WarehouseGenerator(DataGenerator):
-    @classmethod
-    def random(cls, N_books, pub = None):
+class WarehouseGenerator:
+    
+    @staticmethod
+    def random(N_books, pub = None):
         books = [BookGenerator.random(pub) for _ in range(int((N_books * 3/4)))]
         
         books_with_duplicates = [random.choice(books) for _ in range(N_books)]
         return Warehouse(books_with_duplicates)
 
 
-class PublisherGenerator(DataGenerator):
+class PublisherGenerator:
     @staticmethod
     def random(books=None, DEF_N=20, GENERATE=True):
         names = ['AstPress', 'NoShitPress', 'Factoid']

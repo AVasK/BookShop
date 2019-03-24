@@ -4,6 +4,7 @@ Year = 2019
 
 
 class ModelTime:  # time in days
+    current_year = 2019
     _time = 0
     THRESHOLD = 30 # num. of days a book is considered NEW.
     # ^ can be set by classmethod .setThreshold(new_threshold)
@@ -26,6 +27,9 @@ class ModelTime:  # time in days
     def timeStep(cls, days = 1):
         cls._time += days
         
+        if cls._time % 365 == 0:
+            self.current_year += 1
+        
     @classmethod
     def total_time(cls):
         return cls._time
@@ -39,3 +43,7 @@ class ModelTime:  # time in days
     @classmethod
     def set_threshold(cls, new_threshold):
         cls.THRESHOLD = new_threshold
+        
+    @staticmethod
+    def y_to_d(year):
+        return (ModelTime.current_year - year) * 365
