@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
+from store import Warehouse
+
 
 class Color(QWidget):
     def __init__(self, color, *args, **kwargs):
@@ -190,6 +192,8 @@ class ModellingTab(Color):
         super().__init__('white', *args, **kwargs)
         
         self.parent = parent
+        self.filter = False
+        self.query = None
         
         page = QVBoxLayout()
         layout = QHBoxLayout()
@@ -199,6 +203,13 @@ class ModellingTab(Color):
         
         # Column 1
         column1.addWidget(QLabel("Store"))
+        
+        # Search bar
+        search_bar = QLineEdit()
+        search_bar.setPlaceholderText("Поиск:")
+        search_bar.textChanged.connect(self.search_query_changed)
+        column1.addWidget(search_bar)
+        
         self.books_list = QListWidget()
         self.books_list.addItems([])
         column1.addWidget(self.books_list)
@@ -233,6 +244,24 @@ class ModellingTab(Color):
         page.addWidget(stop_button)
         self.setLayout(page)
         
+        
+    def search_query_changed(self, query):
+        if query != '':
+            self.filter = True
+            self.query = query
+            self.books_list.clear()
+            filtered_books = self.search_for_book(query)
+            if filtered_books:
+                self.books_list.addItems(filtered_books)
+        else:
+            self.filter = False
+            self.update_books(self.all_books)
+        
+    def search_for_book(self, query):
+        bookshelf = Warehouse(self.parent.books)
+        #filtered_books = [str(b) for b in bookshelf.findall(query)]
+        filtered_books = [b for b in self.all_books if query in b]
+        return filtered_books
     
     def book_info(self, obj):
         #print(self.books_list.item(n))
@@ -251,8 +280,17 @@ class ModellingTab(Color):
         self.pop_up.show()
         
     def update_books(self, books):
-        self.books_list.clear()
-        self.books_list.addItems(books)
+        if self.filter and self.query is not None:
+            self.books_list.clear()
+            self.all_books = books
+            filtered_books = self.search_for_book(self.query)
+            if filtered_books:
+                self.books_list.addItems(filtered_books)
+            
+        else:
+            self.all_books = books
+            self.books_list.clear()
+            self.books_list.addItems(books)
         
     def update_orders(self, orders):
         self.orders_list.clear()
