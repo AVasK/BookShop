@@ -28,7 +28,7 @@ class ModelTime:  # time in days
         cls._time += days
         
         if cls._time % 365 == 0:
-            self.current_year += 1
+            cls.current_year += 1
         
     @classmethod
     def total_time(cls):

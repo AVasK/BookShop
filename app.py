@@ -24,15 +24,18 @@ class App:
         
         
     def step(self):
-        books = self.env.get_books()
-        orders = [str(o) for o in self.env.order_list()]
+        self.env.step()
+        #self.env.simulate_day()
+        
+        orders = [str(o) for o in reversed(self.env.env_orders)]#reversed(self.env.order_list())]
         promises = [str(p) for p in self.env.promise_list()]
+        books = self.env.get_books()
+        
         self.window.update_books(books)
         self.window.update_orders(orders)
         self.window.update_promises(promises)
         
-        self.env.step()
-        self.env.simulate_day()
+        
         
             
     def stop(self):

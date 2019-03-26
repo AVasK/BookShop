@@ -8,16 +8,19 @@ import random
 
 class Environment:
     
-    def __init__(self, N_BOOKS, usual_markup, new_markup, N_PUB = 3, N_DAYS_STEP = 1):
+    def __init__(self, N_BOOKS, usual_markup, new_markup, N_PUB = 3, N_DAYS_STEP = 1, MAX_CUST_PER_DAY = 10, PUB_SHIPMENT_SIZE = 5):
         
         print('Env. Init.')
+        
+        self.env_orders = []
         
         N_BOOKS = int(N_BOOKS)
         N_PUB = int(N_PUB)
         self.N_DAYS_STEP = int(N_DAYS_STEP)
+        self.MAX_CUST_PER_DAY = int(MAX_CUST_PER_DAY)
         
         # Store:
-        self.store = Store(usual_markup=usual_markup, novel_markup=new_markup)
+        self.store = Store(usual_markup=usual_markup, novel_markup=new_markup, SHIPMENT_SIZE = int(PUB_SHIPMENT_SIZE))
         
         # Books init with Store:
         Book.store = self.store
@@ -40,9 +43,12 @@ class Environment:
 
         
     def step(self):
-        ModelTime.timeStep(days = self.N_DAYS_STEP)
-        self.store.check_orders()
-        self.store.check_promises()
+        for _ in range(self.N_DAYS_STEP):
+            self.simulate_day()
+            ModelTime.timeStep()
+            self.store.check_orders()
+            self.store.check_promises()
+        
         
     def order_list(self):
         return self.store.getOrders()
@@ -54,13 +60,28 @@ class Environment:
         return self.store.books()
     
     def simulate_customer(self):
-        N = random.randint(1, 10) # Number of books the customer orders
-        order = [random.choice(self.book_listing) for _ in range(N)]
+        N = random.randint(1, 4) # Number of books the customer orders
         customer = ManGenerator.random()
-        self.store.order(customer, order)
+        order = Order(self.store, customer, [choose_book(self.book_listing) for _ in range(N)])
+        #self.store.add_order(self.store, customer, order)
+        self.env_orders.append(order)
         
     def simulate_day(self):
-        N_CUST = random.randint(1, 10) # N of customers
+        
+        # all the orders that are ready should be executed
+        def set_pending(order):
+            order.status = 'pending'
+            return order
+        
+        [o.execute() for o in self.env_orders if o.ready()]
+        self.env_orders = [set_pending(o) for o in self.env_orders if not o.ready()] 
+        
+        N_CUST = random.randint(1, self.MAX_CUST_PER_DAY) # N of customers per day
         for _ in range(N_CUST):
             self.simulate_customer()
+            
+
+def choose_book(books, k = 1):
+    books_w_new = books + [b for b in books if b.is_new()] * k
+    return random.choice(books_w_new)
         

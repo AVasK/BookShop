@@ -144,12 +144,15 @@ class Book:
         
     def get_price(self):
         return self.price
+    
+    def real_price(self):
+        return self.store.get_real_price(self)
            
     def __eq__(self, other):
         return hash(self) == hash(other)
         
     def __str__(self):
-        return f"-> {self.name}{' <new> ' if self.is_new() else ''}\nВ наличии: {self.store.shelf.book_count(self)}\nАвторы: {', '.join(str(a) for a in self.authors)}\nЦена: {self.price:,d}"
+        return f"-> {self.name}{' <new> ' if self.is_new() else ''}\nВ наличии: {self.store.shelf.book_count(self)}\nАвторы: {', '.join(str(a) for a in self.authors)}\nЦена: {self.store.get_real_price(self):,d}"
     
     def is_new(self):
         return self.time.is_recent()
@@ -172,12 +175,13 @@ class Book:
 class Store:
     AUTO_BUY = True
     
-    def __init__(self, books = None, usual_markup = 0.15, novel_markup = 0.35):
+    def __init__(self, books = None, usual_markup = 0.15, novel_markup = 0.35, SHIPMENT_SIZE = 5):
         self.shelf = Warehouse(books) if books is not None else Warehouse([])
         self.orders = []
         self.promises = []
         self.usual_markup = usual_markup
         self.novel_markup = novel_markup
+        self.SHIPMENT_SIZE = SHIPMENT_SIZE
 
     def pull_books(self, N_BOOKS = None):
         books = []
@@ -193,14 +197,15 @@ class Store:
             all_books = list(chain.from_iterable([list(p.books) for p in Publisher.enlist()]))
             self.shelf = Warehouse([random.choice(all_books) for _ in range(N_BOOKS)])
     
-    def get_price(self, book):
+    def get_real_price(self, book):
         book = self.shelf.find(book = book)
         if book is None:
-            print("No such book!")
             return 0
         price = book.get_price()
         markup = self.novel_markup if book.is_new() else self.usual_markup
         total = price + markup * price
+        
+        print('M:',total, int(total))
         return int(total)
 
     def order(self, customer, orders : []):
@@ -218,11 +223,11 @@ class Store:
                         most_recent.append(books[0])
                 # the most recent book:
                 book = list(sorted(most_recent, key=lambda x: x.uptime()))[0]
-                book = Book.rePrice(book, self.get_price(book))
+                book = Book.rePrice(book, self.get_real_price(book))
                 book_list.append(book)
             else:
                 # Book:
-                book_list.append(Book.rePrice(order, self.get_price(order)))
+                book_list.append(Book.rePrice(order, self.get_real_price(order)))
                     
         order = Order(self, customer, book_list) 
         
@@ -241,6 +246,9 @@ class Store:
                 order.execute()
                 
         return order
+    
+    def add_order(self, order):
+        self.orders.append(order)
 
     @staticmethod
     def promised_books(promises):
@@ -281,7 +289,7 @@ class Store:
                     # Otherwise, we need to ask publisher to print those books
                     print('Delivery ordered')
                     pub = book.get_publisher()
-                    self.promises.append(pub.print(book, qty = 5))
+                    self.promises.append(pub.print(book, qty = self.SHIPMENT_SIZE))
                     # Publisher will return a Promise() to deliver them in N days.
 
             return Book.copy(book) # Finally, a book is sold to the client.

@@ -14,7 +14,7 @@ class Color(QWidget):
         
         
 class BookWidget(Color):
-    def __init__(self, name, authors, price, pub, qty, *args, **kwargs):
+    def __init__(self, name, authors, price, pub, qty, genre, s_price, *args, **kwargs):
         super().__init__('white', *args, **kwargs)
         
         page = QVBoxLayout()
@@ -40,11 +40,19 @@ class BookWidget(Color):
         layout.addWidget(QLabel('Publisher'), row_n + 1, 0)
         layout.addWidget(QLabel(str(pub)), row_n + 1, 1)
         
-        layout.addWidget(QLabel('Quantity'), row_n + 2, 0)
-        layout.addWidget(QLabel(str(qty)), row_n + 2, 1)
+        layout.addWidget(QLabel('Genre'), row_n + 2, 0)
+        layout.addWidget(QLabel(str(genre)), row_n + 2, 1)
         
-        layout.addWidget(QLabel('Price'), row_n + 3, 0)
-        layout.addWidget(QLabel(str(price)), row_n + 3, 1)
+        layout.addWidget(QLabel('Quantity'), row_n + 3, 0)
+        layout.addWidget(QLabel(str(qty)), row_n + 3, 1)
+        
+        layout.addWidget(QLabel('Raw Price'), row_n + 4, 0)
+        layout.addWidget(QLabel(str(price)), row_n + 4, 1)
+        
+        comment = '' if s_price / price <= 1.5 else '[!!!]'
+        
+        layout.addWidget(QLabel('Selling Price '+comment), row_n + 5, 0)
+        layout.addWidget(QLabel(str(s_price)), row_n + 5, 1)
         
         page.addLayout(layout)
         self.setLayout(page)
@@ -72,7 +80,7 @@ class StatsTab(Color):
         
 class SettingsTab(Color):
     
-    fields = ['N_DAYS_STEP_widget', 'N_BOOKS_widget', 'N_PUB_widget', 'usual_markup_widget', 'new_markup_widget']
+    fields = ['N_DAYS_STEP_widget', 'N_BOOKS_widget', 'N_PUB_widget', 'usual_markup_widget', 'new_markup_widget', 'MAX_CUST_PER_DAY_widget', 'PUB_SHIPMENT_SIZE_widget']
     
     def __init__(self, parent, *args, **kwargs):
         super().__init__('lightgray', *args, **kwargs)
@@ -108,13 +116,25 @@ class SettingsTab(Color):
         s5.addWidget(QLabel("Наценка на новые:"))
         self.new_markup_widget = QLineEdit()
         s5.addWidget(self.new_markup_widget)
+        
+        s6 = QHBoxLayout()
+        s6.addWidget(QLabel("Макс. Кол-во клиентов в день:"))
+        self.MAX_CUST_PER_DAY_widget = QLineEdit()
+        s6.addWidget(self.MAX_CUST_PER_DAY_widget)
+        
+        s7 = QHBoxLayout()
+        s7.addWidget(QLabel("Размер закупочной партии у издателя:"))
+        self.PUB_SHIPMENT_SIZE_widget = QLineEdit()
+        s7.addWidget(self.PUB_SHIPMENT_SIZE_widget)
     
         settings1.addLayout(s1)
         settings1.addLayout(s2)
         settings1.addLayout(s3)
+        settings1.addLayout(s6)
     
         settings2.addLayout(s4)
         settings2.addLayout(s5)
+        settings2.addLayout(s7)
         self.btn = QPushButton('Сохранить настройки')
         self.btn.clicked.connect(self.save_settings)
         settings2.addWidget(self.btn)
@@ -221,6 +241,10 @@ class ModellingTab(Color):
         book = self.parent.books[row]
         desc = book.book_to_POD()
         desc.append(book.qty())
+        desc.append(book.genre)
+        desc.append(book.real_price())
+        print(">>>!", book.store.usual_markup)
+        print(book)
         
         self.pop_up = BookWidget(*desc)
         self.pop_up.setGeometry(QRect(500, 500, 400, 200))
@@ -254,7 +278,7 @@ class newWindow(QMainWindow):
         self.settings = {}
         self.stats = False
         
-        self.setWindowTitle('Colours!')
+        self.setWindowTitle('BookStore')
         
         self.tabs = QTabWidget()
         #self.tabs.setDocumentMode(True)

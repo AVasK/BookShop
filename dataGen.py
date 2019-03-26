@@ -79,7 +79,7 @@ class BookGenerator:
                 'name': cls.gen_name(),
                 'authors': cls.pick_authors(),
                 'publisher': pub,
-                'year': random.randint(ModelTime.current_year - 4, ModelTime.current_year), # new books
+                'year': random.randint(ModelTime.current_year - 4, ModelTime.current_year) if random.random() <= 0.3 else ModelTime.current_year , # new books
                 'genre': random.choice(cls.genres),
                 'pages': random.randint(20, 5000),
                 'price': random.randint(10, 1000),
