@@ -6,6 +6,6 @@
 - [x] Using ModelTime class to handle changes in time gracefully (~or not~)
 - [x] Order, Publisher classes (aand more...)
 - [x] Promise class added to support shipping promises
-- [ ] Supporting Model class for modeling
-- [ ] Operational model
-- [ ] GUI 
+- [x] Supporting Model class for modeling
+- [x] Operational model
+- [x] GUI (using PyQT) 
