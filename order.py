@@ -34,7 +34,6 @@ class Order:
         
     def execute(self):
         if bool(self):
-            print('order is executed')
             return [self.store.buy(b) for b in self.books]
         else:
             return None

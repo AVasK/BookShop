@@ -23,7 +23,8 @@ class Publisher:
     def booksByAuthor(self, author):
         return list(sorted([book for book in self.books if author in book.authors], key=lambda x: x.uptime(), reverse = False))
 
-    def print(self, book, qty):
+    @staticmethod
+    def print(book, qty):
         time = random.choice(list(range(1, 6)))
         return Promise([book] * qty, time)
         

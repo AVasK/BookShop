@@ -6,6 +6,7 @@ from order import Order
 from modelTime import ModelTime
 import random
 
+
 class Environment:
     
     def __init__(self, N_BOOKS, usual_markup, new_markup, N_PUB = 3, N_DAYS_STEP = 1, MAX_CUST_PER_DAY = 10, PUB_SHIPMENT_SIZE = 5):
@@ -31,30 +32,20 @@ class Environment:
         
         # Store:
         self.store.pull_books(N_BOOKS)
-        
-        # ModelTime.timeStep(days = N_DAYS_STEP)
-        
-        print(Publisher.enlist())
-        
-        # o = store.order(ManGenerator.random(), [book, book, books[2]])
         self.book_listing = self.store.books()
-        #books_chosen = [random.choice(bs) for _ in range(4)]
-        #self.store.orders.append(Order(self.store, ManGenerator.random(), books_chosen))
 
-        
     def step(self):
         for _ in range(self.N_DAYS_STEP):
             self.simulate_day()
-            ModelTime.timeStep()
+            ModelTime.time_step()
             self.store.check_orders()
             self.store.check_promises()
-        
-        
+
     def order_list(self):
-        return self.store.getOrders()
+        return self.store.get_orders()
     
     def promise_list(self):
-        return self.store.getPromises()
+        return self.store.get_promises()
     
     def get_books(self):
         return self.store.books()
@@ -84,4 +75,3 @@ class Environment:
 def choose_book(books, k = 1):
     books_w_new = books + [b for b in books if b.is_new()] * k
     return random.choice(books_w_new)
-        

@@ -10,6 +10,7 @@ import man
 class DataGenerator(ABC):
     
     # abstract data generator class
+    @classmethod
     @abstractmethod
     def random(cls, *args, **kwargs):
         pass

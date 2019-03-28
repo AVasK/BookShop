@@ -1,5 +1,3 @@
-## To be implemented
-
 Year = 2019
 
 
@@ -24,7 +22,7 @@ class ModelTime:  # time in days
         return timer
         
     @classmethod
-    def timeStep(cls, days = 1):
+    def time_step(cls, days = 1):
         cls._time += days
         
         if cls._time % 365 == 0:

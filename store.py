@@ -41,7 +41,6 @@ class Warehouse:
     def ratings_by_genre(self, genre):
         books = list(self.books())
         return (genre, [self.rating[b] for b in books if b.genre == genre])
-        
 
     def __getitem__(self, idx):
         return tuple(self.books())[idx] # changed list -> tuple for immutability
@@ -125,7 +124,7 @@ class Book:
         self.time = ModelTime(ModelTime.y_to_d(self.year) + n_days_ago)
 
     @classmethod
-    def rePrice(cls, book, new_price):
+    def reprice(cls, book, new_price):
         new_book = cls(book.name, book.authors, book.publisher, book.year, book.genre, book.pages, new_price, book.for_kids)
         new_book.time = book.time
         return new_book
@@ -164,10 +163,10 @@ class Book:
     def __repr__(self):
         return f"[{self.store.shelf.book_count(self)}]{' <new> ' if self.is_new() else ''}{self.name} | {', '.join(str(a) for a in self.authors)} | {self.price:,d}"
     
+    @property
     def qty(self):
         return self.store.shelf.book_count(self)
-    
-    
+
     def __hash__(self):
         return hash(self.name) ^ hash(self.year) ^ hash(self.authors) ^ hash(self.publisher)
         
@@ -204,8 +203,6 @@ class Store:
         price = book.get_price()
         markup = self.novel_markup if book.is_new() else self.usual_markup
         total = price + markup * price
-        
-        print('M:',total, int(total))
         return int(total)
 
     def order(self, customer, orders : []):
@@ -223,19 +220,17 @@ class Store:
                         most_recent.append(books[0])
                 # the most recent book:
                 book = list(sorted(most_recent, key=lambda x: x.uptime()))[0]
-                book = Book.rePrice(book, self.get_real_price(book))
+                book = Book.reprice(book, self.get_real_price(book))
                 book_list.append(book)
             else:
                 # Book:
-                book_list.append(Book.rePrice(order, self.get_real_price(order)))
+                book_list.append(Book.reprice(order, self.get_real_price(order)))
                     
         order = Order(self, customer, book_list) 
         
         # if the orders are processed simultaneously & automatically
         if self.AUTO_BUY:
-            print("Buying books ASAP")
             if not order:
-                print("Order is archived")
                 # order cannot be executed
                 # and books need to be printed and delivered
                 # self.orders is a queue for those orders.
@@ -282,12 +277,8 @@ class Store:
             if self.shelf.book_count(book) <= self.shelf.THRESHOLD:
                 # There aren't many books left
                 # First, checking if we have ordered this book already:
-                if book in Store.promised_books(self.promises):
-                    print('Waiting for publisher')
-                    pass
-                else:
-                    # Otherwise, we need to ask publisher to print those books
-                    print('Delivery ordered')
+                if book not in Store.promised_books(self.promises):
+                    # need to ask publisher to print those books
                     pub = book.get_publisher()
                     self.promises.append(pub.print(book, qty = self.SHIPMENT_SIZE))
                     # Publisher will return a Promise() to deliver them in N days.
@@ -299,10 +290,10 @@ class Store:
     def books(self):
         return list(self.shelf.books())
     
-    def getOrders(self):
+    def get_orders(self):
         return list(self.orders)
     
-    def getPromises(self):
+    def get_promises(self):
         return list(self.promises)
 
     # Accessing Warehouse:
@@ -317,9 +308,7 @@ if __name__ == '__main__':
     publisher2 = Publisher('NoShitNoPress', WarehouseGenerator.random(4))
     store = Store()
     store.pull_books(10)
-    print(Publisher.enlist())
     
-    # o = store.order(ManGenerator.random(), [book, book, books[2]])
     bs = list(store.access_warehouse().books())
     books_chosen = [random.choice(bs) for _ in range(4)]
     store.orders.append(Order(store, ManGenerator.random(), books_chosen))

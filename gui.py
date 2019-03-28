@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
 from store import Warehouse
+import random
 
 
 class Color(QWidget):
@@ -13,6 +14,34 @@ class Color(QWidget):
         palette = self.palette() # default palette
         palette.setColor(QPalette.Window, QColor(color))
         self.setPalette(palette)
+        
+        
+class ColorWithText(Color):
+    def __init__(self, color, text, *args, **kwargs):
+        super().__init__(color, *args, **kwargs)
+        
+        txtl = QVBoxLayout()
+        txtl.addWidget(QLabel(text))
+        self.setLayout(txtl)
+        
+        
+class BarChartWidget(QWidget):
+    # WorkInProgress
+    def __init__(self, values : [], *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        layout = QHBoxLayout()
+        
+        def produce_colors(n):
+            return [QColor(random.randint(20, 255), random.randint(20, 255), random.randint(20, 255)) for _ in range(n)]
+        
+        colors = produce_colors(len(values))
+        
+        for i, value in enumerate(values):
+            clr = colors.pop()
+            layout.addWidget(ColorWithText(clr, str(i)))
+            
+        self.setLayout(layout)
         
         
 class BookWidget(Color):
@@ -264,17 +293,12 @@ class ModellingTab(Color):
         return filtered_books
     
     def book_info(self, obj):
-        #print(self.books_list.item(n))
-        print(obj.text())
         row = self.books_list.currentRow()
         book = self.parent.books[row]
         desc = book.book_to_POD()
-        desc.append(book.qty())
+        desc.append(book.qty)
         desc.append(book.genre)
         desc.append(book.real_price())
-        print(">>>!", book.store.usual_markup)
-        print(book)
-        
         self.pop_up = BookWidget(*desc)
         self.pop_up.setGeometry(QRect(500, 500, 400, 200))
         self.pop_up.show()
@@ -319,11 +343,11 @@ class newWindow(QMainWindow):
         self.setWindowTitle('BookStore')
         
         self.tabs = QTabWidget()
-        #self.tabs.setDocumentMode(True)
+        # optional : self.tabs.setDocumentMode(True)
         self.tabs.setTabPosition(QTabWidget.North)
         self.tabs.setMovable(True)
         
-        #tabs.addTab(Widget, name)
+        # tabs.addTab(Widget, name) adds a new tab to QTabWidget()
         self.tabs.addTab(SettingsTab(self), 'Параметры')
         self.modelling_tab = QStackedLayout()
         self.modelling_tab.addWidget(DefaultModellingTab())
@@ -336,11 +360,9 @@ class newWindow(QMainWindow):
         self.modelling_wget.setLayout(self.modelling_tab)
         
         self.tabs.addTab(self.modelling_wget, 'Моделирование')
-        #self.tabs.addTab(OrderWidget(False, 'A', ['L.N.V',], 15, 3, 'Pub_unk'), 'Статистика')
         
         self.setCentralWidget(self.tabs)
-        
-        
+
     def settings_set(self):
         self.callback(**self.settings)
         self.step_callback()
@@ -348,8 +370,7 @@ class newWindow(QMainWindow):
         while self.tabs.count() >= 3:
             self.tabs.removeTab(2)
         self.tabs.setCurrentIndex(1)
-        
-    
+
     def update_books(self, books):
         self.books = books
         books = [str(b) for b in books]
@@ -368,17 +389,4 @@ class newWindow(QMainWindow):
             self.tabs.removeTab(2)
         self.tabs.addTab(StatsTab(rating, genre_rating), 'Статистика')
         self.tabs.setCurrentIndex(2)
-        
-        
-
-"""
-app = QApplication([])
-
-new_window = newWindow(print)
-new_window.show()
-
-app.exec_() # the event loop started.
-"""
-
-        
         

@@ -19,14 +19,11 @@ class App:
         self.app.exec_() 
         
     def env_setup(self, *args, **kwargs):
-        print('Callback')
         self.env = Environment(*args, **kwargs)
-        
-        
+
     def step(self):
         self.env.step()
-        #self.env.simulate_day()
-        
+
         orders = [str(o) for o in reversed(self.env.env_orders)]#reversed(self.env.order_list())]
         promises = [str(p) for p in self.env.promise_list()]
         books = self.env.get_books()
@@ -34,10 +31,7 @@ class App:
         self.window.update_books(books)
         self.window.update_orders(orders)
         self.window.update_promises(promises)
-        
-        
-        
-            
+
     def stop(self):
         rating = self.env.store.shelf.list_by_rating()
         from dataGen import BookGenerator
